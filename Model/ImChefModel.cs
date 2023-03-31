@@ -16,6 +16,13 @@ namespace WebAPI
         public Int64 player_id { get; set; }
     }
 
+    public class ImChefModel_vote_period
+    {
+        public Int64 id { get; set; }
+        public DateTime vote_start { get; set; }
+        public DateTime vote_end { get; set; }
+    }
+
     public class ImChefModel_vote_aggregate
     {
         public Int64 vote_count { get; set; }

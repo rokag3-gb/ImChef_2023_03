@@ -136,5 +136,65 @@ namespace WebAPI
                 throw ex;
             }
         }
+
+        [Route("/ImChef2023/vote/")]
+        [HttpDelete]
+        public async Task<ActionResult> Clear_vote()
+        {
+            string conn_str = Secret.conn_str_CM_DEV_DB;
+
+            try
+            {
+                //var param = new DynamicParameters();
+                //param.Add("player_id", vote.player_id);
+
+                int effected_row = 0;
+
+                using (IDbConnection conn = _context.CreateConnection(conn_str))
+                {
+                    if (conn.State != ConnectionState.Open) conn.Open();
+
+                    effected_row = conn.Execute("delete from DB1.food.vote;");
+
+                    if (conn.State == ConnectionState.Open) conn.Close();
+                }
+
+                return StatusCode(200, $"effected_row = {effected_row}");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [Route("/ImChef2023/vote/period")]
+        [HttpGet]
+        public async Task<IEnumerable<ImChefModel_vote_period>> Get_vote_period()
+        {
+            string conn_str = Secret.conn_str_CM_DEV_DB;
+
+            try
+            {
+                using (IDbConnection conn = _context.CreateConnection(conn_str))
+                {
+                    if (conn.State != ConnectionState.Open) conn.Open();
+
+                    var players = await conn.QueryAsync<ImChefModel_vote_period>(
+                        "select"
+                        + " v.id"
+                        + ", v.vote_start"
+                        + ", v.vote_end"
+                        + " from DB1.food.vote_period v;");
+
+                    if (conn.State == ConnectionState.Open) conn.Close();
+
+                    return players;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
