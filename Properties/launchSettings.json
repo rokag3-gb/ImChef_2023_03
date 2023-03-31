@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "WebAPI_PASS_KOREA_2023_03": {
+    "WebAPI_ImChef_2023_03": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
