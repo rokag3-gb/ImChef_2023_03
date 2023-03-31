@@ -24,7 +24,7 @@ namespace WebAPI
             
             // Minimal API test
             app.MapGet("/HelloWorld", (string name) =>
-                $"Hello World! {name}. Minimal API는 이렇게 쓰는겁니다.\r\n{Secret.conn_str_sqlmi_public_primary}"
+                $"Hello World! {name}. Minimal API는 이렇게 쓰는겁니다.\r\n{Secret.conn_str_CM_DEV_DB}"
             );
             
             // Configure the HTTP request pipeline.
